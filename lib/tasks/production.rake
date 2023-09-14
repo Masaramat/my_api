@@ -11,8 +11,7 @@ namespace :production do
       # Migrate the database
       sh 'railway run bundle exec rake db:migrate'
   
-      # Seed the database
-      sh 'railway run bundle exec rake db:seed'
+      
   
       # Start the Rails server in production mode
       sh 'railway run bundle exec rails server'

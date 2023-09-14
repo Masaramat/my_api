@@ -91,10 +91,7 @@ migrate your database
 ```bash
     rails db:migrate
 ```
-For the data to be populated I have an initial data in the root directory (dogs_licence.csv) and configured the seeds.rb file to populate the data so you can run 
-```bash
-    rails db:seed
-```
+
 
 ### How to run app in development
 Run the application in development by running 

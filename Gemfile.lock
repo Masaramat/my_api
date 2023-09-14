@@ -109,6 +109,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.19.0)
     msgpack (1.7.2)
+    mysql2 (0.5.5)
     net-imap (0.3.7)
       date
       net-protocol
@@ -126,6 +127,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.7)
@@ -192,7 +195,7 @@ GEM
     rswag-ui (2.10.1)
       actionpack (>= 3.1, < 7.1)
       railties (>= 3.1, < 7.1)
-    sqlite3 (1.6.3-x86_64-linux)
+    sqlite3 (1.6.6-x86_64-linux)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -215,14 +218,16 @@ DEPENDENCIES
   devise (~> 4.7)
   doorkeeper (~> 5.6)
   hiredis
+  mysql2 (~> 0.5.3)
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.7)
   redis
   rspec (~> 3.12)
   rspec-rails
   rswag-api
   rswag-ui
-  sqlite3 (~> 1.4)
+  sqlite3
   tzinfo-data
   will_paginate
 
