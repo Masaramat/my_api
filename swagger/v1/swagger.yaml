@@ -1,0 +1,447 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/oauth/token": {
+      "post": {
+        "summary": "Authenticates with jwt token",
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "testBasicAuth",
+        "security": [
+          {
+            "basic_auth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid credentials"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/login_credentials"
+              }
+            }
+          }
+        }
+      }
+      
+    },
+    "/api/v1/users": {
+      "post": {
+        "summary": "Create new user",
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "testApiKey",
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid credentials"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/user_credentials"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oauth/revoke": {
+      "post": {
+        "summary": "Revokes token with basic auth use client_id for username and client_password for password to authorize",
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "testBasicAndApiKey",
+        "security": [
+          {
+            "Basic Auth": []            
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Valid credentials"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/logout_credentials"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/dogs": {
+      "post": {
+        "summary": "Creates a new dog licence information",
+        "tags": [
+          "Dogs"
+        ],
+        "description": "Creates a new dog licence information",
+        "operationId": "createDog",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Dog info created"
+          },
+          "422": {
+            "description": "invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/errors_object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/dog"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all dogs information",
+        "tags": [
+          "Dogs"
+        ],
+        "description": "Get All dogs",
+        "operationId": "searchDogs",
+        
+        "responses": {
+          "200": {
+            "description": "no content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/dog"
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "unsupported accept header"
+          }
+        }
+      }
+    },
+    
+    "/api/v1/dogs/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a Dog",
+        "tags": [
+          "Dogs"
+        ],
+        "description": "Retrieves a specific Dog by id",
+        "operationId": "getDog",
+        "responses": {
+          "200": {
+            "description": "Dog found",
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Last-Modified": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/dog"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "blog not found"
+          }
+        }
+      }
+    },
+    "/api/v1/dogs/{dog_id}": {
+      "parameters": [
+        {
+          "name": "dog_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "put": {
+        "summary": "Update a dog information",
+        "tags": [
+          "Dogs"
+        ],
+        "description": "Update a dog license info by id",
+        "operationId": "updateDog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Dog info updated"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/dog"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/dogs/{delete_dog_id}": {
+      "parameters": [
+        {
+          "name": "delete_dog_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "delete": {
+        "summary": "Deletes a Dog",
+        "tags": [
+          "Dogs"
+        ],
+        "description": "Deletes a specific Dog by id",
+        "operationId": "deleteDog",
+        "responses": {
+          "200": {
+            "description": "Dog Deleted",
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Last-Modified": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/dog"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "blog not found"
+          }
+        }
+      }
+    },
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000/",
+      "variables": {
+        "defaultHost": {
+          "default": "http://127.0.0.1:3000/"
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "errors_object": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "$ref": "#/definitions/errors_map"
+        }
+      }
+    },
+    "errors_map": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "dog": {
+      "type": "object",
+      "properties": {
+        "license": {
+          "type": "string"
+        },
+        "breed": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "integer"
+        },
+        "expiry": {
+          "type": "integer"
+        }
+        
+      },
+      "required": [
+        "license",
+        "breed",
+        "color",
+        "name",
+        "zip",
+        "expiry"
+      ]
+    },
+    "login_credentials": {
+      "type": "object",
+      "properties": {
+        
+        "grant_type": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "password": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string",
+          "x-nullable": false
+        }
+        
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "logout_credentials": {
+      "type": "object",
+      "properties": {
+        
+        "token": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "client_secret ": {
+          "type": "string",
+          "x-nullable": false
+        }
+        
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "user_credentials": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "password": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "client_id": {
+          "type": "string",
+          "x-nullable": false
+        }
+        
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    }
+    
+  },
+  "components": {
+    "securitySchemes": {      
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "Basic Auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  
+  "security": [
+  {
+    "BearerAuth": []
+  }
+]
+}

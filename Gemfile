@@ -7,13 +7,13 @@ ruby "3.2.2"
 gem "rails", "~> 7.0.7"
 
 gem 'csv'
+gem 'will_paginate'
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
-
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -44,7 +44,18 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rspec-rails'
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
 
+
+gem "devise", "~> 4.7"
+
+gem "doorkeeper", "~> 5.6"
+gem 'redis'
+gem 'hiredis'
+gem 'rswag-api'
+gem 'rswag-ui'
+
+gem "rspec", "~> 3.12"
